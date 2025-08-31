@@ -1,0 +1,49 @@
+@use "styles/mixins" as *;
+
+.heading-l {
+  font-size: 8rem;
+}
+
+.heading {
+  font-size: 4rem;
+}
+
+.text-l {
+  font-size: 2rem;
+}
+
+.text {
+  font-size: 1.6rem;
+}
+
+.text-s {
+  font-size: 1.4rem;
+}
+
+.text-xs {
+  font-size: 1.2rem;
+}
+
+.bold {
+  font-weight: 700;
+}
+
+.semi-bold {
+  font-weight: 600;
+}
+
+.medium {
+  font-weight: 500;
+}
+
+.uppercase {
+  text-transform: uppercase;
+}
+
+.capitalize {
+  text-transform: capitalize;
+}
+
+.underline {
+  text-decoration: underline;
+}

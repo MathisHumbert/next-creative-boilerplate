@@ -1,0 +1,19 @@
+@use "../mixins" as *;
+@use "../variables" as *;
+@use "../functions" as *;
+
+.footer {
+  display: grid;
+  grid-template-columns: repeat($grid-count, 1fr);
+  grid-gap: 0px $grid-gutter;
+  padding: 12rem $grid-margin;
+
+  p {
+    grid-column: 0;
+  }
+
+  a {
+    grid-column: 4;
+    width: fit-content;
+  }
+}

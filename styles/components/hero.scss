@@ -1,0 +1,26 @@
+@use "../mixins" as *;
+@use "../variables" as *;
+@use "../functions" as *;
+
+.hero {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10rem;
+  padding: $grid-margin;
+
+  p {
+    margin-left: calc(columns(6) + $grid-gutter);
+  }
+
+  h1 {
+    display: flex;
+    flex-direction: column;
+
+    span:last-of-type {
+      margin-left: calc(columns(6) + $grid-gutter);
+    }
+  }
+}

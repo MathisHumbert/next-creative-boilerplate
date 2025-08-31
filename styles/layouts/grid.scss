@@ -1,0 +1,33 @@
+@use "../variables" as *;
+@use "../functions" as *;
+
+.grid {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  max-width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: space-between;
+  gap: $grid-gutter;
+  padding: 0 $grid-margin;
+  z-index: z("grid");
+  pointer-events: none;
+
+  &__column {
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 0, 0, 0.1);
+  }
+
+  &__line {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 100%;
+    height: 2rem;
+    background: rgba(255, 0, 0, 0.1);
+  }
+}

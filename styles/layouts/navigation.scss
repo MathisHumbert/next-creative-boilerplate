@@ -1,0 +1,27 @@
+@use "../mixins" as *;
+@use "../variables" as *;
+@use "../functions" as *;
+
+.nav {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+
+  padding: $grid-margin $grid-margin;
+  z-index: z("navigation");
+  pointer-events: none;
+
+  ul {
+    display: flex;
+    gap: $grid-gutter;
+  }
+
+  li {
+    width: columns(1);
+  }
+
+  a {
+    pointer-events: all;
+  }
+}

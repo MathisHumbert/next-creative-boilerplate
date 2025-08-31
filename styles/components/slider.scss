@@ -1,0 +1,41 @@
+@use "../mixins" as *;
+@use "../variables" as *;
+@use "../functions" as *;
+
+.slider {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding: calc($grid-margin * 3) 0;
+
+  h2 {
+    margin-left: $grid-margin;
+  }
+
+  &__wrapper {
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
+  }
+
+  &__inner {
+    display: flex;
+    margin-left: calc(50vw - columns(3) / 2);
+  }
+
+  &__item {
+    width: calc(columns(3) + $grid-gutter);
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    padding: 0 calc($grid-gutter * 0.5);
+
+    figure {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 1 / 1;
+    }
+  }
+}
