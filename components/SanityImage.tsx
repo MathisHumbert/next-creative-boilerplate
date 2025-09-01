@@ -1,4 +1,4 @@
-import { Image, ImageProps } from "@/components/image";
+import { Image, ImageProps } from "@/components/Image";
 import { urlForImage } from "@/libs/sanity";
 import type { CustomImage } from "@/sanity/sanity.types";
 

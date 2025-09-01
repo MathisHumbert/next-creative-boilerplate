@@ -1,6 +1,6 @@
 import { createClient } from "next-sanity";
 import imageUrlBuilder from "@sanity/image-url";
-import type { Home, About } from "@/sanity/sanity.types";
+import type { Home, About, Settings } from "@/sanity/sanity.types";
 
 export const client = createClient({
   projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
@@ -36,5 +36,11 @@ export async function getAboutPageData(): Promise<About> {
     },
     seo,
     settings
+  }`);
+}
+
+export async function getSeoData(): Promise<Settings> {
+  return await client.fetch(`*[_type == "settings"][0]{
+    fallbackSEO
   }`);
 }

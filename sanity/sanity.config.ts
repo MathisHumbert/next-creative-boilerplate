@@ -6,8 +6,6 @@ import { singletonTools } from "sanity-plugin-singleton-tools";
 import { structure } from "./structure";
 import { schemaTypes } from "./schemaTypes";
 
-console.log(process.env);
-
 export default defineConfig({
   name: "default",
   title: "Starter",

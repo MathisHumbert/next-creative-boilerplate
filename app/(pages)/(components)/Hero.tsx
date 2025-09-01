@@ -1,5 +1,7 @@
-import type { Hero as HeroType } from "@/sanity/sanity.types";
 import React from "react";
+
+import type { Hero as HeroType } from "@/sanity/sanity.types";
+import { TextReveal } from "../(animations)/TextReveal";
 
 export function Hero(data: HeroType) {
   if (!data) return null;
@@ -20,9 +22,13 @@ export function Hero(data: HeroType) {
         </p>
       )}
       <header>
-        <h1 className="heading-l bold uppercase" aria-label="Home Page">
-          <span>{titleLeft}</span>
-          <span>{titleRight}</span>
+        <h1 className="heading-l bold uppercase">
+          <TextReveal delay={0.1} rotate={15}>
+            <span>{titleLeft}</span>
+          </TextReveal>
+          <TextReveal delay={0.2} rotate={15}>
+            <span>{titleRight}</span>
+          </TextReveal>
         </h1>
       </header>
     </section>

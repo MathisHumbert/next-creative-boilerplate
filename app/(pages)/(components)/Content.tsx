@@ -1,6 +1,6 @@
-import { Hero } from "@/app/(pages)/(components)/hero";
-import { Slider } from "@/app/(pages)/(components)/slider";
-import { HeadingText } from "@/app/(pages)/(components)/heading-text";
+import { Hero } from "@/app/(pages)/(components)/Hero";
+import { Slider } from "@/app/(pages)/(components)/Slider";
+import { HeadingText } from "@/app/(pages)/(components)/HeadingText";
 
 import type {
   Hero as HeroType,

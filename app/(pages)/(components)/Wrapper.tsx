@@ -4,8 +4,8 @@ import { usePathname } from "next/navigation";
 import { useEffect, type ReactNode } from "react";
 import cn from "clsx";
 
+import { Footer } from "@/app/(pages)/(components)/Footer";
 import type { PageSettings } from "@/sanity/sanity.types";
-import { Footer } from "../footer";
 
 type WrapperProps = {
   children: ReactNode;

@@ -21,7 +21,9 @@
     width: columns(1);
   }
 
-  a {
+  a,
+  button {
+    padding: 0;
     pointer-events: all;
   }
 }

@@ -1,8 +1,8 @@
 import { notFound } from "next/navigation";
 import { Metadata } from "next";
 
-import { Content } from "@/app/(pages)/(components)/content";
-import { Wrapper } from "@/app/(pages)/(components)/wrapper";
+import { Content } from "@/app/(pages)/(components)/Content";
+import { Wrapper } from "@/app/(pages)/(components)/Wrapper";
 import { getAboutPageData, urlForImage } from "@/libs/sanity";
 import type { About as AboutType } from "@/sanity/sanity.types";
 

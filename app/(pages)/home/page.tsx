@@ -1,8 +1,8 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 
-import { Content } from "@/app/(pages)/(components)/content";
-import { Wrapper } from "@/app/(pages)/(components)/wrapper";
+import { Content } from "@/app/(pages)/(components)/Content";
+import { Wrapper } from "@/app/(pages)/(components)/Wrapper";
 import { getHomePageData, urlForImage } from "@/libs/sanity";
 import type { Home as HomeType } from "@/sanity/sanity.types";
 

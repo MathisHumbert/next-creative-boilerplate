@@ -8,6 +8,7 @@ import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 
 import { delay, events } from "@/libs/utils";
+import { useStore } from "@/libs/store";
 
 export function Preloader() {
   if (process.env.NODE_ENV == "development") {
@@ -18,12 +19,13 @@ export function Preloader() {
 }
 
 function PreloaderDevelopment() {
-  const path = usePathname();
+  const { setAreFontsLoaded, setPageVisible } = useStore();
 
   useEffect(() => {
     document.documentElement.classList.add("loaded", "visible");
     window.dispatchEvent(new Event("resize"));
-    events.emit("showPage", path);
+    setAreFontsLoaded(true);
+    setPageVisible(true);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -37,6 +39,7 @@ function PreloaderProduction() {
   const [nextReady, setNextReady] = useState<boolean>(false);
   const router = useRouter();
   const path = usePathname();
+  const { setAreFontsLoaded } = useStore();
 
   const { contextSafe } = useGSAP(
     () => {
@@ -52,9 +55,11 @@ function PreloaderProduction() {
       await Promise.all([newGroteskFont.load()]);
 
       setFontsLoaded(true);
+      setAreFontsLoaded(true);
     } catch (error: any) {
       console.log(error);
       setFontsLoaded(true);
+      setAreFontsLoaded(true);
     }
   };
 

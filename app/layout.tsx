@@ -1,32 +1,18 @@
-import type { Metadata } from "next";
 import { ReactTempus } from "tempus/react";
 
-import { GSAPRuntime } from "@/components/gsap/runtime";
+import { GSAP } from "@/components/Gsap";
 import { StoreProvider } from "@/libs/store";
 import { WindowEventsProvider } from "@/libs/events";
-import { Grid } from "@/components/grid";
-import { Stats } from "@/components/stats";
-import { Preloader } from "@/components/preloader";
-import { Transition } from "@/components/transition";
-import { Navigation } from "@/app/(pages)/(components)/navigation";
-import { ScrollContainer } from "@/app/(pages)/(components)/scroll-container";
+import { Grid } from "@/components/Grid";
+import { Stats } from "@/components/Stats";
+import { Preloader } from "@/components/Preloader";
+import { Transition } from "@/components/Transition";
+import { Navigation } from "@/app/(pages)/(components)/Navigation";
+import { ScrollWrapper } from "@/app/(pages)/(components)/ScrollWrapper";
+import { Menu } from "@/app/(pages)/(components)/Menu";
+import { urlForImage, getSeoData } from "@/libs/sanity";
 
 import "../styles/global.scss";
-
-export const metadata: Metadata = {
-  title: "Next Starter",
-  description: "Next Starter",
-  icons: {
-    icon: [
-      {
-        url: "/icons/favicon.ico",
-        type: "image/ico",
-        sizes: "256x256",
-      },
-    ],
-    apple: [{ url: "/icons/favicon.ico", sizes: "256x256" }],
-  },
-};
 
 export default async function RootLayout({
   children,
@@ -38,12 +24,13 @@ export default async function RootLayout({
       <body>
         <WindowEventsProvider>
           <StoreProvider>
-            <GSAPRuntime />
+            <GSAP />
             <Preloader />
+            <Menu />
             <Navigation />
-            <ScrollContainer>
+            <ScrollWrapper>
               <Transition>{children}</Transition>
-            </ScrollContainer>
+            </ScrollWrapper>
             <ReactTempus patch />
             <Grid />
             <Stats />
@@ -52,4 +39,57 @@ export default async function RootLayout({
       </body>
     </html>
   );
+}
+
+export async function generateMetadata() {
+  const data = await getSeoData();
+  const seo = data?.fallbackSEO;
+
+  const title = seo?.metaTitle || "Next Starter";
+  const description = seo?.metaDescription || "Next Starter";
+  const ogImage = seo?.ogImage
+    ? urlForImage(seo.ogImage).width(1200).height(630).url()
+    : null;
+
+  const image = ogImage
+    ? {
+        url: ogImage,
+        width: 1200,
+        height: 630,
+        alt: seo?.ogImage?.alt || title,
+      }
+    : {};
+
+  return {
+    metadataBase: new URL(""),
+    title,
+    description,
+    keywords: seo?.keywords || "",
+    openGraph: {
+      type: "website",
+      locale: "en_US",
+      url: "https://preymaker.com",
+      siteName: "Preymaker",
+      title,
+      description,
+      images: [image],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [image],
+    },
+    icons: {
+      icon: [
+        {
+          url: "/icons/favicon.ico",
+          type: "image/ico",
+          sizes: "256x256",
+        },
+      ],
+      apple: [{ url: "/icons/favicon.ico", sizes: "256x256" }],
+    },
+    authors: [{ name: "Mathis Humbert", url: "https://mathishumbert.com/" }],
+  };
 }

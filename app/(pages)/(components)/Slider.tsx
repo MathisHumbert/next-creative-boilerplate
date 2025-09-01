@@ -1,8 +1,7 @@
 "use client";
 
 import { useSmooothy } from "@/hooks/useSmooothy";
-import { SanityImage } from "@/components/sanity-image";
-
+import { SanityImage } from "@/components/SanityImage";
 import type { Slider as SliderType } from "@/sanity/sanity.types";
 
 export function Slider(data: SliderType) {

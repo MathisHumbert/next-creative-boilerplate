@@ -12,48 +12,55 @@ import Lenis from "lenis";
 import { events } from "@/libs/utils";
 
 type StoreState = {
-  isNavOpened: boolean;
+  isMenuOpened: boolean;
   isPageVisible: boolean;
   lenis: Lenis | null;
   isLenisReady: boolean;
+  areFontsLoaded: boolean;
 };
 
 type StoreAction =
-  | { type: "SET_NAV_OPENED"; payload: boolean }
+  | { type: "SET_MENU_OPENED"; payload: boolean }
   | { type: "SET_PAGE_VISIBLE"; payload: boolean }
   | { type: "SET_LENIS"; payload: Lenis | null }
-  | { type: "SET_LENIS_READY"; payload: boolean };
+  | { type: "SET_LENIS_READY"; payload: boolean }
+  | { type: "SET_FONTS_LOADED"; payload: boolean };
 
 type StoreContextType = {
-  isNavOpened: boolean;
-  setIsNavOpened: (value: boolean) => void;
+  isMenuOpened: boolean;
+  setIsMenuOpened: (value: boolean) => void;
   isPageVisible: boolean;
   setPageVisible: (value: boolean) => void;
   lenis: Lenis | null;
   setLenis: (lenis: Lenis | null) => void;
   isLenisReady: boolean;
   setLenisReady: (ready: boolean) => void;
+  areFontsLoaded: boolean;
+  setAreFontsLoaded: (loaded: boolean) => void;
 };
 
 const StoreContext = createContext<StoreContextType>({} as StoreContextType);
 
 const initialState: StoreState = {
-  isNavOpened: false,
+  isMenuOpened: false,
   isPageVisible: false,
   lenis: null,
   isLenisReady: false,
+  areFontsLoaded: false,
 };
 
 function reducer(state: StoreState, action: StoreAction): StoreState {
   switch (action.type) {
-    case "SET_NAV_OPENED":
-      return { ...state, isNavOpened: action.payload };
+    case "SET_MENU_OPENED":
+      return { ...state, isMenuOpened: action.payload };
     case "SET_PAGE_VISIBLE":
       return { ...state, isPageVisible: action.payload };
     case "SET_LENIS":
       return { ...state, lenis: action.payload };
     case "SET_LENIS_READY":
       return { ...state, isLenisReady: action.payload };
+    case "SET_FONTS_LOADED":
+      return { ...state, areFontsLoaded: action.payload };
     default:
       return state;
   }
@@ -67,8 +74,8 @@ export function StoreProvider({ children }: { children: ReactNode }) {
     events.on("hidePage", () => setPageVisible(false));
   }, []);
 
-  const setIsNavOpened = (value: boolean) => {
-    dispatch({ type: "SET_NAV_OPENED", payload: value });
+  const setIsMenuOpened = (value: boolean) => {
+    dispatch({ type: "SET_MENU_OPENED", payload: value });
   };
 
   const setPageVisible = (value: boolean) => {
@@ -83,15 +90,21 @@ export function StoreProvider({ children }: { children: ReactNode }) {
     dispatch({ type: "SET_LENIS_READY", payload: ready });
   };
 
+  const setAreFontsLoaded = (loaded: boolean) => {
+    dispatch({ type: "SET_FONTS_LOADED", payload: loaded });
+  };
+
   const value: StoreContextType = {
-    isNavOpened: state.isNavOpened,
-    setIsNavOpened,
+    isMenuOpened: state.isMenuOpened,
+    setIsMenuOpened,
     isPageVisible: state.isPageVisible,
     setPageVisible,
     lenis: state.lenis,
     setLenis,
     isLenisReady: state.isLenisReady,
     setLenisReady,
+    areFontsLoaded: state.areFontsLoaded,
+    setAreFontsLoaded,
   };
 
   return (

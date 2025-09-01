@@ -11,10 +11,10 @@ import { events } from "@/libs/utils";
 
 gsap.registerPlugin(ScrollTrigger);
 
-export function ScrollContainer({ children }: { children: React.ReactNode }) {
+export function ScrollWrapper({ children }: { children: React.ReactNode }) {
   const lenisWrapperRef = useRef<HTMLDivElement>(null);
   const lenisRef = useRef<Lenis | null>(null);
-  const { isNavOpened, setLenis, setLenisReady } = useStore();
+  const { isMenuOpened, setLenis, setLenisReady } = useStore();
 
   useEffect(() => {
     if (window.history.scrollRestoration) {
@@ -30,7 +30,7 @@ export function ScrollContainer({ children }: { children: React.ReactNode }) {
         content: lenisWrapperRef.current.firstChild as HTMLElement,
         lerp: 0.125,
         wheelMultiplier: 0.75,
-        touchMultiplier: 1,
+        touchMultiplier: 0.75,
         autoRaf: false,
       });
 
@@ -76,12 +76,12 @@ export function ScrollContainer({ children }: { children: React.ReactNode }) {
   }, []);
 
   useEffect(() => {
-    if (isNavOpened) {
+    if (isMenuOpened) {
       lenisRef.current?.stop();
     } else {
       lenisRef.current?.start();
     }
-  }, [isNavOpened, lenisRef]);
+  }, [isMenuOpened, lenisRef]);
 
   useTempus((time: number) => {
     if (lenisRef.current) {

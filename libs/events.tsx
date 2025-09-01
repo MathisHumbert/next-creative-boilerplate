@@ -132,7 +132,7 @@ export function WindowEventsProvider({ children }: { children: ReactNode }) {
 
 export function useWindowEvents(
   eventType: string,
-  callback: EventCallback | ResizeCallback
+  callback?: EventCallback | ResizeCallback
 ) {
   const context = useContext(WindowEventsContext);
 

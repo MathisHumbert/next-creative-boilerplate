@@ -1,5 +1,7 @@
 import Link from "next/link";
+
 import type { PageSettings } from "@/sanity/sanity.types";
+import { LineReveal } from "../(animations)/LineReveal";
 
 interface FooterProps {
   nextPage?: PageSettings["footerPage"];
@@ -18,6 +20,9 @@ export function Footer({ nextPage }: FooterProps) {
 
   return (
     <footer className="footer">
+      <LineReveal>
+        <span className="footer__line" />
+      </LineReveal>
       <p className="text-xs uppercase">Next Page</p>
       <Link href={getHref()} scroll={false} className="text-xs uppercase">
         {getLabel()}

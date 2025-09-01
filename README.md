@@ -1,36 +1,76 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Next.js Creative Boilerplate
+
+A modern creative boilerplate built with Next.js 15, Sanity CMS, and GSAP animations. Perfect for creative agencies, portfolios, and interactive websites.
+
+## Features
+
+- **Next.js 15** with App Router and TypeScript
+- **Sanity CMS** integration with structured content management
+- **GSAP** animations with custom components (LineReveal, SlideUp, Appear, TextReveal)
+- **Lenis** smooth scrolling
+- **Tempus** for optimized animation timing
+- Responsive design with SCSS styling
+- SEO optimization with dynamic metadata
+- Performance optimized with preloader and transitions
 
 ## Getting Started
 
-First, run the development server:
+### Development Server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) to view the website.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Sanity Studio
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+cd sanity
+npm run dev
+```
 
-## Learn More
+Open [http://localhost:3333](http://localhost:3333) to access the Sanity Studio.
 
-To learn more about Next.js, take a look at the following resources:
+## Project Structure
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```
+app/(pages)/
+├── (animations)/        # Reusable GSAP animation components
+├── (components)/        # Page-specific components
+├── home/               # Home page
+└── about/              # About page
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+components/             # Global reusable components
+libs/                  # Utilities and configurations
+sanity/                # Sanity CMS configuration and schemas
+styles/                # SCSS styling organized by type
+```
 
-## Deploy on Vercel
+## Animation System
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+The project includes a custom animation system built on GSAP:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- **LineReveal**: Scale-based reveal animations
+- **SlideUp**: Slide up with optional opacity fade
+- **Appear**: Simple fade-in animations  
+- **TextReveal**: Text-specific reveal effects
+
+All animation components support scroll triggers, delays, and page load detection.
+
+## Content Management
+
+Sanity CMS provides:
+- Structured page content with flexible blocks
+- SEO management with fallback settings
+- Image optimization and management
+- Singleton documents for global settings
+
+## Build & Deploy
+
+```bash
+npm run build
+npm run start
+```
+
+Configure your environment variables and deploy to your preferred platform.
