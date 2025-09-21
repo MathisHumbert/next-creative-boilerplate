@@ -61,7 +61,7 @@ export async function generateMetadata() {
     : {};
 
   return {
-    metadataBase: new URL(""),
+    // metadataBase: new URL(""),
     title,
     description,
     keywords: seo?.keywords || "",

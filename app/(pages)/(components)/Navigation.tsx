@@ -1,7 +1,7 @@
 "use client";
 
 import { useStore } from "@/libs/store";
-import Link from "next/link";
+import { Link as TransitionLink } from "next-transition-router";
 
 export function Navigation() {
   const { setIsMenuOpened } = useStore();
@@ -10,14 +10,18 @@ export function Navigation() {
     <nav className="nav">
       <ul>
         <li>
-          <Link href="/" scroll={false} className="text-xs uppercase">
+          <TransitionLink href="/" scroll={false} className="text-xs uppercase">
             Home
-          </Link>
+          </TransitionLink>
         </li>
         <li>
-          <Link href="/about" scroll={false} className="text-xs uppercase">
+          <TransitionLink
+            href="/about"
+            scroll={false}
+            className="text-xs uppercase"
+          >
             About
-          </Link>
+          </TransitionLink>
         </li>
         <li>
           <button

@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { Link as TransitionLink } from "next-transition-router";
 
 import type { PageSettings } from "@/sanity/sanity.types";
 import { LineReveal } from "../(animations)/LineReveal";
@@ -24,9 +24,13 @@ export function Footer({ nextPage }: FooterProps) {
         <span className="footer__line" />
       </LineReveal>
       <p className="text-xs uppercase">Next Page</p>
-      <Link href={getHref()} scroll={false} className="text-xs uppercase">
+      <TransitionLink
+        href={getHref()}
+        scroll={false}
+        className="text-xs uppercase"
+      >
         {getLabel()}
-      </Link>
+      </TransitionLink>
     </footer>
   );
 }

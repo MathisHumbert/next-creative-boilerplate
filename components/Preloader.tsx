@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState, useRef } from "react";
-import { useRouter, usePathname } from "next/navigation";
+import { usePathname } from "next/navigation";
 import FontFaceObserver from "fontfaceobserver";
 import imagesLoadedLib from "imagesloaded";
 import gsap from "gsap";
@@ -11,7 +11,7 @@ import { delay, events } from "@/libs/utils";
 import { useStore } from "@/libs/store";
 
 export function Preloader() {
-  if (process.env.NODE_ENV == "development") {
+  if (process.env.NODE_ENV === "development") {
     return <PreloaderDevelopment />;
   } else {
     return <PreloaderProduction />;
@@ -19,6 +19,7 @@ export function Preloader() {
 }
 
 function PreloaderDevelopment() {
+  const path = usePathname();
   const { setAreFontsLoaded, setPageVisible } = useStore();
 
   useEffect(() => {
@@ -26,6 +27,7 @@ function PreloaderDevelopment() {
     window.dispatchEvent(new Event("resize"));
     setAreFontsLoaded(true);
     setPageVisible(true);
+    events.emit("showPage", path);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -36,8 +38,6 @@ function PreloaderProduction() {
   const containerRef = useRef<HTMLDivElement>(null);
   const [fontsLoaded, setFontsLoaded] = useState<boolean>(false);
   const [imagesLoaded, setImagesLoaded] = useState<boolean>(false);
-  const [nextReady, setNextReady] = useState<boolean>(false);
-  const router = useRouter();
   const path = usePathname();
   const { setAreFontsLoaded } = useStore();
 
@@ -108,41 +108,16 @@ function PreloaderProduction() {
 
   useEffect(() => {
     loadFonts();
+    loadImages();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      loadImages();
-    }
-  }, []);
-
-  useEffect(() => {
-    let timeoutId: NodeJS.Timeout;
-
-    const checkNextReady = () => {
-      if (
-        (typeof window !== "undefined" && (window as any).next?.router) ||
-        (router as any).isReady
-      ) {
-        setNextReady(true);
-      } else {
-        timeoutId = setTimeout(checkNextReady, 100);
-      }
-    };
-
-    checkNextReady();
-
-    return () => {
-      if (timeoutId) clearTimeout(timeoutId);
-    };
-  }, [router]);
-
-  useEffect(() => {
-    if (nextReady && imagesLoaded && fontsLoaded) {
+    if (imagesLoaded && fontsLoaded) {
       hidePreloader();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [fontsLoaded, imagesLoaded, nextReady]);
+  }, [fontsLoaded, imagesLoaded]);
 
   return <div className="preloader" ref={containerRef}></div>;
 }
